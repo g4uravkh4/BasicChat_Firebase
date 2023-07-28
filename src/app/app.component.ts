@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { Database, getDatabase, ref, set, onValue } from 'firebase/database';
@@ -18,7 +18,7 @@ import { Chat } from './chat/chat';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'hamroChat';
   app: FirebaseApp;
   db: Database;
@@ -33,6 +33,17 @@ export class AppComponent {
     this.form = this.formBuilder.group({
       message: [],
       username: [],
+    });
+  }
+  ngOnInit(): void {
+    const chatsRef = ref(this.db, 'chats');
+    onValue(chatsRef, (snapshot: any) => {
+      const data = snapshot.val();
+      for (let id in data) {
+        if (!this.chats.map((chat) => chat.id).includes(id)) {
+          this.chats.push(data[id]);
+        }
+      }
     });
   }
 
