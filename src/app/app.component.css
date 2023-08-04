@@ -2,11 +2,15 @@
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
     width: 400px;
     height: 60%;
     overflow-y: scroll;
+}
+
+#history .span{
+    margin-left: 1rem;
 }
 
 #message {
@@ -22,4 +26,8 @@
 
 .mb {
     margin-bottom: 1em;
+}
+
+.container{
+    background-color: #f0f0f0;
 }
